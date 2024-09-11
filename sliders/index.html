@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sliders</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #f0f0f0;
+      }
+      .slider1 {
+        appearance: none; /* removes browser-specific styling */
+        width: 300px; /* width of slider */
+        height: 25px; /* height of slider */
+        background: #ff5c35; /* orange background */
+        outline: none; /* remove outline */
+        border-radius: 12px; /* round corners */
+      }
+
+      .slider2 {
+        appearance: none; /* removes browser-specific styling */
+        width: 300px; /* width of slider */
+        height: 25px; /* height of slider */
+        background: #ff5c35; /* orange background */
+        outline: none; /* remove outline */
+        border-radius: 50px; /* round corners */
+      }
+
+      .slider2::-webkit-slider-thumb {
+        appearance: none; /* removes browser-specific styling */
+        width: 20px; /* handle width */
+        height: 20px; /* handle height */
+        border-radius: 50%; /* make it circular */
+        background: #1500ff;
+        cursor: pointer; /* cursor on hover */
+      }
+
+      .slider3 {
+        position: relative;
+        appearance: none; /* removes browser-specific styling */
+        --h: 300px;
+        width: var(--h); /* width of slider (actually the height when rotated)*/
+        height: 25px; /* height of slider */
+        background: #ff5c35; /* orange background */
+        outline: none; /* remove outline */
+        border-radius: 50px; /* round corners */
+        margin-block: calc(var(--h)/2);
+        transform: rotate(270deg); /* rotate the element */
+      }
+
+      .slider3::-webkit-slider-thumb {
+        appearance: none; /* removes browser-specific styling */
+        width: 20px; /* handle width */
+        height: 20px; /* handle height */
+        border-radius: 50%; /* make it circular */
+        background: #ffffff; /* white color */
+        cursor: pointer; /* cursor on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <h2>custom background color</h2>
+    <input class="slider1" type="range" min="0" max="100" value="50" />
+    <h2>custom background & thumb color</h2>
+    <input class="slider2" type="range" min="0" max="100" value="50" />
+    <h2>custom background & thumb color & vertical</h2>
+    <input class="slider3" type="range" min="0" max="100" value="50" />
+  </body>
+</html>
