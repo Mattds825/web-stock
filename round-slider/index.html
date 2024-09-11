@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Round Slider</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+
+      .knob-container {
+        position: relative;
+        width: 100px;
+        height: 100px;
+      }
+
+      .rotary-knob {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: conic-gradient(
+          from 180deg,
+          #d4af37 0%,
+          #c69735 50%,
+          #d4af37 100%
+        );
+        border: 2px solid #333;
+        position: relative;
+      }
+
+      .knob-indicator {
+        width: 10px;
+        height: 20px;
+        background: #333;
+        border-radius: 10px;
+        /* border: 2px solid #fff; */
+        position: absolute;
+        top: 5px;
+        left: 45px;
+        transform-origin: 50% 100%;
+      }
+
+      #knob-value {
+        margin-top: 0.5rem;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="knob-container">
+      <div class="rotary-knob" id="knob">
+        <div class="knob-indicator"></div>
+      </div>
+      <div id="knob-value">50</div>
+    </div>
+    <script>
+      const knob = document.getElementById("knob");
+      let isDragging = false;
+      let startY = 0;
+      let currentAngle = 0; // Initial angle
+
+      // Function to update the knob's rotation
+      const updateKnob = (deltaY) => {
+        const sensitivity = 0.5; // Adjust this value to control speed of rotation
+        currentAngle -= deltaY * sensitivity; // Subtract deltaY to rotate up for up movement
+        currentAngle = Math.max(-135, Math.min(currentAngle, 135)); // Clamp the angle between -135 and 135 degrees
+        knob.style.transform = `rotate(${currentAngle}deg)`; // Apply rotation to knob
+
+        // Calculate the knob value based on the current angle (-135 to 135 maps to 0 to 100)
+        const value = Math.round(((currentAngle + 135) / 270) * 100);
+        document.getElementById("knob-value").textContent = value; // Update the knob value
+      };
+
+      const onMouseMove = (event) => {
+        if (!isDragging) return;
+        const deltaY = event.clientY - startY; // Difference in vertical movement
+        startY = event.clientY; // Update the start position
+        updateKnob(deltaY); // Update knob rotation based on movement
+      };
+
+      const onMouseUp = () => {
+        isDragging = false;
+      };
+
+      knob.addEventListener("mousedown", (event) => {
+        isDragging = true;
+        startY = event.clientY; // Set the initial mouse Y position
+      });
+
+      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mouseup", onMouseUp);
+    </script>
+  </body>
+</html>
