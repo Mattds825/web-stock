@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button Ripple Effect</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        overflow: hidden;
+        justify-content: center;
+        background: #22232e;
+        gap: 20px;
+      }
+      button {
+        position: relative;
+        padding: 15px 45px;
+        font-size: 1.5rem;
+        border-radius: 15px;
+        border: none;
+        background: #00c2cb;
+        color: #22232e;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      button:active {
+        transform: scale(0.95);
+      }
+      @keyframes ripple {
+        0% {
+          width: 0;
+          height: 0;
+          opacity: 0.5;
+        }
+        100% {
+          width: 500px;
+          height: 500px;
+          opacity: 0;
+        }
+      }
+      .ripple {
+        position: absolute;
+        overflow: hidden;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        border-radius: 50%;
+        animation: ripple 2s linear;
+        transition: 0.5s;
+      }
+      .solid {
+        background: #004958;
+      }
+      .line {
+        background: none;
+        border: 3px solid #004958;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn1">Click Me</button>
+    <button id="btn2" class="btn-2">Click Me</button>
+    <script>
+      let btn = document.querySelectorAll("button");
+      btn.forEach((btn) => {
+        btn.onclick = function (e) {
+          let x;
+          let y;
+
+          let ripples = document.createElement("span");
+          ripples.classList.add("ripple");
+
+          if (e.target.id === "btn1") {
+            // place ripple on bottom left of page
+            x = 0 + 100;
+            y = document.body.clientHeight - 100;
+            ripples.classList.add("solid");
+          } else if (e.target.id === "btn2") {
+            // place ripple on bottom right of page
+            x = document.body.clientWidth - 100;
+            y = document.body.clientHeight - 100;
+            ripples.classList.add("line");
+          }
+        // ripple based on click position
+          //   x = (e.pageX - e.target.offsetLeft) * (window.innerWidth / e.target.clientWidth);
+          //   y = (e.pageY - e.target.offsetTop) * (window.innerHeight / e.target.clientHeight);
+
+          ripples.style.left = x + "px";
+          ripples.style.top = y + "px";
+          document.body.appendChild(ripples);
+
+          setTimeout(() => {
+            ripples.remove();
+          }, 2000);
+        };
+      });
+    </script>
+  </body>
+</html>
