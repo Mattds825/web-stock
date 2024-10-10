@@ -1,11 +1,11 @@
-const section = document.querySelector(".book-showcase");
-const book = document.querySelector(".book");
+const section = document.querySelector(".polaroid-showcase");
+const polaroid = document.querySelector(".polaroid");
 const body = document.querySelector("body");
 
 // pervious rotation value
 let prev = 0;
 
-// calculation (stores calculation formula for tracking the mouse and book rotation)
+// calculation (stores calculation formula for tracking the mouse and polaroid rotation)
 let calc = 0;
 
 // drag sensitivity (the higher the number the less sensitive the drag)
@@ -15,14 +15,14 @@ const sensitivity = 2;
 section.addEventListener("mousedown", (e) => {
   const x = e.clientX;
 
-  // rotate the book on mousemove
+  // rotate the polaroid on mousemove
   section.addEventListener("mousemove", rotate);
 
   function rotate(e) {
     calc = (e.clientX - x) / sensitivity;
 
-    // rotate the book from the previous rotation value
-    book.style.transform = `rotateY(${prev + calc}deg)`;
+    // rotate the polaroid from the previous rotation value
+    polaroid.style.transform = `rotateY(${prev + calc}deg)`;
 
     // change the cursor to grabbing
     body.style.cursor = "grabbing";

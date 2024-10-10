@@ -36,7 +36,7 @@ body {
   transform-style: preserve-3d;
   width: var(--face-width);
   height: var(--face-height);
-  /* center the polaroid */
+  /* center the book */
   transform-origin: calc(var(--face-width) / 2) calc(var(--side-width) / 2);
   position: relative;
 }
@@ -105,14 +105,14 @@ body {
     transform-origin: bottom;
 }
 
-.polaroid .shadow{
+.book .shadow{
     width: var(--face-width);
     height: var(--side-width);
     background: radial-gradient(
         rgba(0, 0, 0, 0.4),
         transparent
     );
-    transform: rotateX(90deg), translate3d(0, 2.1875, -38em);
+    transform: rotateX(90deg) translate3d(0, 2.1875, -38em);
     transform-origin: bottom;
 }
 
